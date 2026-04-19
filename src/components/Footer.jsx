@@ -71,9 +71,18 @@ const Footer = () => {
 
         <div className="pt-10 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-text/40 font-medium">
           <p>© {new Date().getFullYear()} JENNI WELLBEING. Alle Rechte vorbehalten.</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-primary transition-colors">Impressum</a>
-            <a href="#" className="hover:text-primary transition-colors">Datenschutz</a>
+          <div className="flex items-center gap-1.5 group hover:text-primary/60 transition-colors">
+            <span>Built with</span>
+            <Heart className="w-4 h-4 text-red-500 fill-red-500 transition-transform group-hover:scale-125 duration-300" />
+            <span>by</span>
+            <a 
+              href="https://sahedalomsumit.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-primary hover:text-primary/80 transition-colors font-bold"
+            >
+              Sahed
+            </a>
           </div>
         </div>
       </div>

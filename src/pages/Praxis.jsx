@@ -2,8 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote, BookOpen, Users, Camera, Star } from 'lucide-react';
 
-const TeamMember = ({ name, role, description, image }) => (
-  <div className="glass-card group overflow-hidden">
+const TeamMember = ({ name, role, description, image, index }) => (
+  <motion.div 
+    variants={{
+      hidden: { opacity: 0, y: 30 },
+      show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    }}
+    className="glass-card group overflow-hidden"
+  >
     <div className="aspect-[3/4] overflow-hidden">
       <img src={image} alt={name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
     </div>
@@ -12,7 +18,7 @@ const TeamMember = ({ name, role, description, image }) => (
       <p className="text-primary font-bold text-sm uppercase tracking-widest mb-4">{role}</p>
       <p className="text-text/60 text-sm leading-relaxed">{description}</p>
     </div>
-  </div>
+  </motion.div>
 );
 
 const Praxis = () => {
@@ -21,19 +27,19 @@ const Praxis = () => {
       name: "Gabriela Jenni",
       role: "Praxisinhaberin & Therapeutin",
       description: "Spezialisiert auf Ayurveda und medizinische Massagen. Langjährige Erfahrung in ganzheitlichen Heilmethoden.",
-      image: "/img/therapist.png"
+      image: `${import.meta.env.BASE_URL}img/therapist.png`
     },
     {
       name: "Isabelle Graber",
       role: "Medizinische Masseurin",
       description: "Expertin für klassische Massage, Lymphdrainage und Sportmassage.",
-      image: "/img/therapist2.png"
+      image: `${import.meta.env.BASE_URL}img/therapist2.png`
     },
     {
       name: "Sabrina Hostettler",
       role: "Therapeutin",
       description: "Fokus auf Naturheilkunde und entspannende Wellness-Behandlungen.",
-      image: "/img/therapist3.png"
+      image: `${import.meta.env.BASE_URL}img/therapist3.png`
     }
   ];
 
@@ -41,7 +47,12 @@ const Praxis = () => {
     <div className="pt-32 pb-20">
       <section className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-32">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <div className="flex items-center gap-4 text-primary font-bold tracking-widest text-sm uppercase mb-6">
               <div className="w-8 h-1 bg-primary"></div>
               UNSERE PHILOSOPHIE
@@ -67,10 +78,16 @@ const Praxis = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="relative">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
             <div className="rounded-[3rem] overflow-hidden shadow-soft-inner border-8 border-white">
-              <img src="/img/praxis.png" alt="Praxis Impression" />
+              <img src={`${import.meta.env.BASE_URL}img/praxis.png`} alt="Praxis Impression" />
             </div>
             <div className="absolute -bottom-10 -right-10 glass-card p-10 max-w-xs bg-white text-primary">
               <Quote className="w-10 h-10 mb-4 opacity-20" />
@@ -78,7 +95,7 @@ const Praxis = () => {
                 "Der Rhythmus ist es, der das Leben trägt."
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Team Section */}
@@ -89,11 +106,23 @@ const Praxis = () => {
               Ihre Gesundheit in den besten Händen. Lernen Sie die Menschen hinter JENNI WELLBEING kennen.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: { staggerChildren: 0.2 }
+              }
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+          >
             {team.map((member, i) => (
-              <TeamMember key={i} {...member} />
+              <TeamMember key={i} index={i} {...member} />
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* Impressionen Gallery */}
@@ -104,12 +133,32 @@ const Praxis = () => {
               <p className="text-text/50 font-medium mt-2">Einblick in unsere Wohlfühloase</p>
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <img src="/img/gallery/impression1.png" alt="Gallery 1" className="rounded-2xl shadow-sm hover:scale-105 transition-transform duration-500" />
-            <img src="/img/gallery/impression2.png" alt="Gallery 2" className="rounded-2xl shadow-sm hover:scale-105 transition-transform duration-500" />
-            <img src="/img/gallery/impression3.png" alt="Gallery 3" className="rounded-2xl shadow-sm hover:scale-105 transition-transform duration-500" />
-            <img src="/img/gallery/impression4.png" alt="Gallery 4" className="rounded-2xl shadow-sm hover:scale-105 transition-transform duration-500" />
-          </div>
+          <motion.div 
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: { staggerChildren: 0.1 }
+              }
+            }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+          >
+            {[1, 2, 3, 4].map((num) => (
+              <motion.img 
+                key={num}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9 },
+                  show: { opacity: 1, scale: 1 }
+                }}
+                src={`${import.meta.env.BASE_URL}img/gallery/impression${num}.png`} 
+                alt={`Gallery ${num}`} 
+                className="rounded-2xl shadow-sm hover:scale-105 transition-transform duration-500" 
+              />
+            ))}
+          </motion.div>
         </section>
       </section>
     </div>

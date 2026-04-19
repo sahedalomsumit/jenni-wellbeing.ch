@@ -103,7 +103,7 @@ const Home = () => {
             >
               <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
                 <img 
-                  src="/img/hero.png" 
+                  src={`${import.meta.env.BASE_URL}img/hero.png`} 
                   alt="Jenni Wellbeing Praxis Bern" 
                   className="w-full h-full object-cover aspect-[4/3] scale-105"
                 />
@@ -135,18 +135,42 @@ const Home = () => {
       {/* Services Section */}
       <section className="py-24 bg-white relative">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl md:text-5xl font-heading font-black text-text mb-6">Unsere Leistungen</h2>
             <p className="text-lg text-text/60 max-w-2xl mx-auto">
               In unserer zentral gelegenen Praxis in Bern bieten wir ein breites Spektrum an Therapien 
               für Ihre Gesundheit und Entspannung. Ganzheitlich vereint.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.2
+                }
+              }
+            }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
             {services.map((s, idx) => (
               <motion.div
                 key={idx}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
                 whileHover={{ y: -10 }}
                 className="glass-card p-10 flex flex-col items-center text-center transition-all duration-300 group hover:border-primary/30"
               >
@@ -163,14 +187,20 @@ const Home = () => {
                 </Link>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Info Section */}
       <section className="py-24 bg-background overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="glass-card p-8 md:p-16 flex flex-col lg:flex-row gap-16 items-center bg-white/60">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="glass-card p-8 md:p-16 flex flex-col lg:flex-row gap-16 items-center bg-white/60"
+          >
             <div className="lg:w-1/2">
               <h2 className="text-3xl md:text-4xl font-heading font-black text-text mb-8">
                 Massagen ganzheitlich erleben
@@ -193,11 +223,23 @@ const Home = () => {
             </div>
             <div className="lg:w-1/2 relative">
               <div className="grid grid-cols-2 gap-4">
-                <img src="/img/praxis.png" alt="Praxis 1" className="rounded-2xl shadow-lg" />
-                <img src="/img/ayurveda.png" alt="Praxis 2" className="rounded-2xl shadow-lg mt-8" />
+                <motion.img 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  src={`${import.meta.env.BASE_URL}img/praxis.png`} alt="Praxis 1" className="rounded-2xl shadow-lg" 
+                />
+                <motion.img 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  src={`${import.meta.env.BASE_URL}img/ayurveda.png`} alt="Praxis 2" className="rounded-2xl shadow-lg mt-8" 
+                />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 

@@ -10,10 +10,16 @@ const Terminbuchung = () => {
       <section className="container mx-auto px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 rounded-full text-primary font-bold text-sm mb-6 border border-primary/10"
             >
               <Calendar className="w-4 h-4" />
@@ -25,11 +31,16 @@ const Terminbuchung = () => {
             <p className="text-xl text-text/60 max-w-2xl mx-auto font-medium">
               Buchen Sie Ihren Wohlfühltermin in nur wenigen Klicks. Unser System zeigt Ihnen alle verfügbaren Zeiten in Echtzeit.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
             {/* Info Sidebar */}
-            <div className="lg:col-span-1 space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="lg:col-span-1 space-y-6"
+            >
               <div className="glass-card p-6 bg-white border-primary/5">
                 <h3 className="font-bold text-text mb-4 flex items-center gap-2 text-primary">
                   <User className="w-5 h-5" />
@@ -73,10 +84,15 @@ const Terminbuchung = () => {
                   ))}
                 </ul>
               </div>
-            </div>
+            </motion.div>
 
             {/* Booking Iframe */}
-            <div className="lg:col-span-3 relative">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              className="lg:col-span-3 relative"
+            >
               <div className="glass-card bg-white overflow-hidden shadow-2xl border-primary/10 min-h-[800px] flex flex-col">
                 {loading && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
@@ -106,7 +122,7 @@ const Terminbuchung = () => {
                   In neuem Fenster öffnen
                 </a>
               </div>
-            </div>
+            </motion.div>
           </div>
           
           <div className="text-center py-8 opacity-40">

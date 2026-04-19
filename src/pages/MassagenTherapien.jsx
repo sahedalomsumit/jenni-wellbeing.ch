@@ -3,7 +3,12 @@ import { motion } from 'framer-motion';
 import { Activity, Sparkles, Heart, Baby, CheckCircle2 } from 'lucide-react';
 
 const ServiceCard = ({ title, price, description, items }) => (
-  <div className="glass-card p-8 bg-white border-primary/5 hover:border-primary/20 transition-all duration-300">
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    className="glass-card p-8 bg-white border-primary/5 hover:border-primary/20 transition-all duration-300"
+  >
     <div className="flex justify-between items-start mb-6">
       <h3 className="text-xl font-bold text-text">{title}</h3>
       {price && <span className="bg-primary/10 text-primary px-3 py-1 rounded-lg text-sm font-black">{price}</span>}
@@ -19,7 +24,7 @@ const ServiceCard = ({ title, price, description, items }) => (
         ))}
       </ul>
     )}
-  </div>
+  </motion.div>
 );
 
 const MassagenTherapien = () => {
@@ -84,16 +89,29 @@ const MassagenTherapien = () => {
   return (
     <div className="pt-32 pb-20">
       <section className="container mx-auto px-4 md:px-6">
-        <div className="max-w-3xl mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl mb-20"
+        >
           <h1 className="text-5xl md:text-6xl font-heading font-black text-text mb-8">Massagen & <span className="text-primary">Therapien</span></h1>
           <p className="text-xl text-text/60 leading-relaxed font-medium">
             Von der klassischen medizinischen Massage über verschiedene Ayurveda Massagen bis hin zur Naturheilkunde bieten wir Ihnen ein fundiertes Spektrum an Behandlungen.
           </p>
-        </div>
+        </motion.div>
 
         <div className="space-y-32">
           {sections.map((section, idx) => (
-            <div key={section.id} id={section.id} className="scroll-mt-40">
+            <motion.div 
+              key={section.id} 
+              id={section.id} 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="scroll-mt-40"
+            >
               <div className="flex flex-col md:flex-row items-start gap-8 mb-12">
                 <div className={`p-5 ${section.bgColor} ${section.color} rounded-2xl shadow-soft`}>
                   {section.icon}
@@ -109,7 +127,7 @@ const MassagenTherapien = () => {
                   <ServiceCard key={sIdx} {...service} />
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>

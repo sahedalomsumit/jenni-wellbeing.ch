@@ -1,35 +1,53 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 
 const Kontakt = () => {
   return (
     <div className="pt-32 pb-20">
       <section className="container mx-auto px-4 md:px-6">
-        <div className="max-w-3xl mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl mb-20"
+        >
           <h1 className="text-5xl md:text-6xl font-heading font-black text-text mb-8">Kontakt & <span className="text-primary">Anfahrt</span></h1>
           <p className="text-xl text-text/60 font-medium">
             Haben Sie Fragen oder möchten Sie einen Termin vereinbaren? Wir freuen uns auf Ihre Nachricht oder Ihren Anruf.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <div className="space-y-12">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-12"
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="glass-card p-8 group hover:bg-primary transition-all duration-300">
+              <motion.div 
+                whileHover={{ y: -5 }}
+                className="glass-card p-8 group hover:bg-primary transition-all duration-300"
+              >
                 <div className="w-12 h-12 bg-primary/10 group-hover:bg-white/20 rounded-xl flex items-center justify-center text-primary group-hover:text-white mb-6">
                   <Phone className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-bold text-text group-hover:text-white mb-2">Telefon</h3>
                 <a href="tel:+41792672208" className="text-text/60 group-hover:text-white/80 font-medium">+41 79 267 22 08</a>
-              </div>
+              </motion.div>
 
-              <div className="glass-card p-8 group hover:bg-primary transition-all duration-300">
+              <motion.div 
+                whileHover={{ y: -5 }}
+                className="glass-card p-8 group hover:bg-primary transition-all duration-300"
+              >
                 <div className="w-12 h-12 bg-primary/10 group-hover:bg-white/20 rounded-xl flex items-center justify-center text-primary group-hover:text-white mb-6">
                   <Mail className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-bold text-text group-hover:text-white mb-2">E-Mail</h3>
                 <a href="mailto:info@jenni-wellbeing.ch" className="text-text/60 group-hover:text-white/80 font-medium">info@jenni-wellbeing.ch</a>
-              </div>
+              </motion.div>
             </div>
 
             <div className="glass-card p-10">
@@ -59,16 +77,26 @@ const Kontakt = () => {
             </div>
             
             {/* Simple Map Placeholder */}
-            <div className="rounded-[2.5rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 h-64 border-4 border-white shadow-soft">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="rounded-[2.5rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 h-64 border-4 border-white shadow-soft"
+            >
               <img 
-                src="/img/contact.png" 
+                src={`${import.meta.env.BASE_URL}img/contact.png`} 
                 alt="Standort Bern" 
                 className="w-full h-full object-cover"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <div className="glass-card p-10 md:p-12">
               <h2 className="text-3xl font-heading font-black text-text mb-8">Schreiben Sie uns</h2>
               <form className="space-y-6">
@@ -96,7 +124,7 @@ const Kontakt = () => {
                 </button>
               </form>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
