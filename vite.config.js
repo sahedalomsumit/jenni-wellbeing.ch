@@ -4,7 +4,7 @@ import babel from '@rolldown/plugin-babel'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/jenni-wellbeing.ch/',
+  base: process.env.VITE_BASE_PATH || '/',
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] })
